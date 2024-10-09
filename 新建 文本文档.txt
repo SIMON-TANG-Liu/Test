@@ -1,6 +1,1 @@
-<<<<<<< HEAD
 HelloWorld111
-aaa
-=======
-HelloWorld222
->>>>>>> f09acb26d07bba052c0ecd5210130a810f55a777
