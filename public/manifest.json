@@ -1,0 +1,12 @@
+{
+  "name": "SwanLab",
+  "short_name": "SwanLab",
+  "start_url": ".",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "/512x512.svg",
+      "sizes": "512x512"
+    }
+  ]
+}

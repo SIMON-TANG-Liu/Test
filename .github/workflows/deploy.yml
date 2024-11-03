@@ -1,0 +1,55 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Move public and static
+        run: |
+          mv ./public .next/standalone/public
+          mv .next/static .next/standalone/.next/static
+
+      - name: Compress build files
+        run: |
+          cd .next
+          tar -czvf standalone.tar.gz standalone
+          mv standalone.tar.gz ../
+
+      - name: Upload to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SWANLAB_DEV_HOST }}
+          username: ${{ secrets.SWANLAB_DEV_USER }}
+          password: ${{ secrets.SWANLAB_DEV_PASSWORD }}
+          port: ${{ secrets.SWANLAB_DEV_PORT }}
+          source: 'standalone.tar.gz'
+          target: '~/projects/SwanLab-Core-App/'
+
+      - name: Restart dev server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SWANLAB_DEV_HOST }}
+          username: ${{ secrets.SWANLAB_DEV_USER }}
+          password: ${{ secrets.SWANLAB_DEV_PASSWORD }}
+          port: ${{ secrets.SWANLAB_DEV_PORT }}
+          script: |
+            cd ~/projects/SwanLab-Core-App
+            rm -rf standalone/
+            tar -xzvf standalone.tar.gz
+            cd ~/SwanLab-IaC/deploy/dev/
+            docker compose restart swanlab-core-app
