@@ -3,6 +3,7 @@ import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import CodeBlock from '../src/app/(dashboard)/_components/quick-start-code/CodeBlock'
 
+// 一个测试分支的标记
 describe('CodeBlock Component', () => {
   test('单个f""模板语法字符串', () => {
     const code = 'print(f"I have {number} cars")'
