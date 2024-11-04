@@ -76,3 +76,28 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.python{
+  .comment {
+    @apply text-green-600 dark:text-green-500;
+  }
+  .keyword {
+    @apply text-blue-500 dark:text-blue-500;
+  }
+
+  .number {
+    @apply text-green-900 dark:text-green-400;
+  }
+
+  .string {
+    @apply text-yellow-700 dark:text-yellow-400;
+  }
+
+  .operator {
+    @apply text-orange-500 dark:text-orange-500;
+  }
+
+  .built-in {
+    @apply text-blue-700 dark:text-blue-400;
+  }
+}

@@ -1,3 +1,5 @@
+import { en as QuickStartCodeEn, zh as QuickStartCodeZh } from '@/app/(dashboard)/_components/quick-start-code/messages'
+
 export const zh = {
   DashboardSidebar: {
     search: {
@@ -67,7 +69,8 @@ export const zh = {
     },
     me: '{username} 的项目',
     create: '创建组织'
-  }
+  },
+  QuickStartCode: QuickStartCodeZh
 }
 
 export const en = {
@@ -139,5 +142,6 @@ export const en = {
     },
     me: "{username}'s projects",
     create: 'Create Team'
-  }
+  },
+  QuickStartCode: QuickStartCodeEn
 }
