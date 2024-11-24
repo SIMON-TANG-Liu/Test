@@ -51,3 +51,5 @@ action 负责在 main 分支更新后，构建新的程序并添加到服务器�
 之后每次 action 执行到最后都会重启这个服务，重启时会重新挂载目录，这个时候容器就可以同步到最新的程序。
 
 test content
+
+![image-20241124134259590](C:\Users\SIMON TANG\AppData\Roaming\Typora\typora-user-images\image-20241124134259590.png)
