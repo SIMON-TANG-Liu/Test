@@ -1,0 +1,22 @@
+name: Check Intl
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check-intl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.8"
+
+      - name: Run Intl Check
+        run: |
+          python3 scripts/check_i18n.py src 
