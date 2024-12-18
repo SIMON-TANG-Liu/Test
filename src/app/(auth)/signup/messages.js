@@ -50,7 +50,8 @@ export const en = {
     professionalTip: 'Have a complex company use case? Get <bold> Enterprise grade </bold> assistance'
   },
   verifying: {
-    title: 'Sign up for SwanLab'
+    title: 'Sign up for SwanLab',
+    tip: 'If you don’t have an account, we have sent a verification code to <bold>{phone}</bold>. Please enter the code.'
   },
   Profile: ProfileEn
 }
