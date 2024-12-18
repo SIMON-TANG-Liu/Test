@@ -2,7 +2,6 @@ import argparse
 import json
 import os
 import re
-import sys
 
 mismatch = False
 
@@ -60,6 +59,8 @@ def process_json_string(json_str):
 
 # 定义一个比较字典的函数
 def compare_dicts(dict1, dict2, path="", file_path=""):
+    global mismatch
+
     for key in dict1.keys():
         if key not in dict2:
             print(f'(File: {file_path}) Key "{path + key}" is missing in en.')
@@ -89,7 +90,6 @@ def process_messages_file(file_path):
         zh_json_str = process_json_string(zh_json_str)
         en_json_str = process_json_string(en_json_str)
 
-        # print(f"Processing file: {file_path}")
         # print("zh_json_str:", zh_json_str)
         # print("en_json_str:", en_json_str)
 
@@ -102,12 +102,10 @@ def process_messages_file(file_path):
             compare_dicts(zh_dict, en_dict, file_path=file_path)
 
         except json.JSONDecodeError as e:
-            print(f"JSON Decode Error in {file_path}: {e}")
-            sys.exit(1)  # 退出并返回错误状态
+            raise RuntimeError(f"JSON Decode Error in {file_path}: {e}")
 
     else:
-        print(f"some lang is None")
-        sys.exit(1)
+        raise RuntimeError(f"some lang is None")
 
 
 def main():
@@ -132,8 +130,9 @@ def main():
                 process_messages_file(file_path)
 
     print("check finished.")
+
     if mismatch:
-        sys.exit(1)  # 退出并返回错误状态
+        raise RuntimeError(f"some mismatched keys exist")
 
 
 if __name__ == "__main__":
